@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Виселица</title>
+	<style>
+		body {
+			background: #9094A8 url(1.gif) no-repeat top/60%;
+		}
+		h1 {
+			font-family: Arial, Tahoma, sans-serif;
+			font-weight: bold;
+			text-align: center;
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+<body>
+		<h1>Виселица</h1>
+	<script>
+		var words = [
+			"программа",
+			"обезьяна",
+			"прекрасный",
+			"оладушек",
+			"компьютер",
+			"зеленый",
+			"родители",
+			"автомобиль",
+			"независимость",
+			"гражданство",
+			"политика"
+		];
+		var word = words[Math.floor(Math.random() * words.length)];
+		var answerArray = [];
+		var remainingLetters = word.length;
+		var guess;
+		var eff = word.length;
+		var question = confirm ('Сыграем?');
+
+		if (question == true) {
+			var name = prompt('Как тебя зовут?');
+			alert('Привет ' + name + '!');
+
+			for (var i = 0; i < word.length; i++) {
+				answerArray[i] = '_';
+			}
+			
+			alert ('Загадано слово из ' + word.length + ' букв ' + answerArray.join(' '));
+
+			while ((remainingLetters > 0) && (eff > 0)) {
+				alert ('Осталось ' + remainingLetters + ' букв  ' + answerArray.join(' '));
+				guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
+				if (guess === null) {
+					break;
+				} else if (guess.length !== 1) {
+					alert ("Пожалуйста, введите одну букву!");
+				} else {
+					for (var j = 0; j < word.length; j++) {
+						if (word[j] === guess.toLowerCase()) {
+							if (answerArray[j] == '_') {
+								answerArray[j] = guess.toLowerCase();
+								remainingLetters--;
+							} else {
+								alert('Буквы ' + guess + ' больше нет в этом слове!');
+							}							
+						} else {
+							alert('Неверно! Осталось попыток: ' + eff--);
+						}
+					}
+				} 
+			}
+			if (answerArray.join('') == word) {
+				alert (answerArray.join(" "));
+				alert ("Отлично! Было загадано слово " + word);
+			} else {
+				alert('Слово не было отгадано, попробуй еще раз!');
+			}
+		} else {
+			alert('Приходи в другой раз!');
+		}
+		
+	
+	</script>
+</body>
+</html>
