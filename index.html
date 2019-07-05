@@ -50,7 +50,7 @@
 			
 			alert ('Загадано слово из ' + word.length + ' букв ' + answerArray.join(' '));
 
-			while ((remainingLetters > 0) && (eff > 0)) {
+			while (remainingLetters > 0) {
 				alert ('Осталось ' + remainingLetters + ' букв  ' + answerArray.join(' '));
 				guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
 				if (guess === null) {
@@ -66,8 +66,6 @@
 							} else {
 								alert('Буквы ' + guess + ' больше нет в этом слове!');
 							}							
-						} else {
-							alert('Неверно! Осталось попыток: ' + eff--);
 						}
 					}
 				} 
