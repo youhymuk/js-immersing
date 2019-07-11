@@ -33,31 +33,60 @@
 			"гражданство",
 			"политика"
 		];
-		var word = words[Math.floor(Math.random() * words.length)];
-		var answerArray = [];
-		var remainingLetters = word.length;
-		var guess;
+		function pickWord () {
+			 return words[Math.floor(Math.random() * words.length)]; // Возвращает случайно выбранное слово
+		};
+		function setupAnswerArray(word) { 
+			for (var i = 0; i < word.length; i++) { // Возвращает итоговый массив для заданного слова word
+				 return answerArray[i] = "_";
+			}
+		};
+		function showPlayerProgress(answerArray) {
+			alert ('Осталось ' + remainingLetters + ' букв  ' + answerArray.join(' ')); // Отображает текущее состояние игры
+		};
+		function getGuess() {
+			return prompt("Угадайте букву или нажмите Отмена для выхода из игры."); // Запрашивает ответ игрока с помощью prompt
+		};
+		function updateGameState(guess, word, answerArray) {
+		// Обновляет answerArray согласно ответу игрока (guess)
+		// возвращает число, обозначающее, сколько раз буква guess
+		// встречается в слове, чтобы можно было обновить значение
+		// remainingLetters
+		};
+		function result (answerArray) {
+			if (answerArray.join('') == word) {
+				alert ("Отлично! Было загадано слово " + word);
+			} else {
+				alert('Слово не было отгадано, попробуй еще раз!');
+			}// выводим результат игры
+		};
+
+		var word = pickWord(); //загаданное слово
+		var answerArray = setupAnswerArray(word); //итоговый массив
+		var remainingLetters = word.length; //сколько букв осталось угадать
+		var guess; //ответ игрока
 		var eff = word.length;
+
+		
 		var question = confirm ('Сыграем?');
 
 		if (question == true) {
 			var name = prompt('Как тебя зовут?');
 			alert('Привет ' + name + '!');
-
-			for (var i = 0; i < word.length; i++) {
-				answerArray[i] = '_';
-			}
-			
-			alert ('Загадано слово из ' + word.length + ' букв ' + answerArray.join(' '));
-
+			alert ('Загадано слово из ' + word.length + ' букв.';
+			//игровой цикл
 			while (remainingLetters > 0) {
-				alert ('Осталось ' + remainingLetters + ' букв  ' + answerArray.join(' '));
-				guess = prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
+				// Показываем состояние игры
+				showPlayerProgress(answerArray);
+				// Запрашиваем вариант ответа
+				var guess = getGuess(); 
 				if (guess === null) {
+					// Выходим из игрового цикла
 					break;
 				} else if (guess.length !== 1) {
 					alert ("Пожалуйста, введите одну букву!");
 				} else {
+					var correctGuesses = updateGameState(guess, word, answerArray);
 					for (var j = 0; j < word.length; j++) {
 						if (word[j] === guess.toLowerCase()) {
 							if (answerArray[j] == '_') {
@@ -70,12 +99,7 @@
 					}
 				} 
 			}
-			if (answerArray.join('') == word) {
-				alert (answerArray.join(" "));
-				alert ("Отлично! Было загадано слово " + word);
-			} else {
-				alert('Слово не было отгадано, попробуй еще раз!');
-			}
+			
 		} else {
 			alert('Приходи в другой раз!');
 		}
