@@ -20,7 +20,9 @@
 <body>
 		<h1>Виселица</h1>
 	<script>
-		var words = [
+		function pickWord () {
+			 // Возвращает случайно выбранное слово
+			var words = [
 			"программа",
 			"обезьяна",
 			"прекрасный",
@@ -33,20 +35,29 @@
 			"гражданство",
 			"политика"
 		];
-		function pickWord () {
-			 return words[Math.floor(Math.random() * words.length)]; // Возвращает случайно выбранное слово
+			 return words[Math.floor(Math.random() * words.length)];
 		};
-		function setupAnswerArray(word) { 
-			for (var i = 0; i < word.length; i++) { // Возвращает итоговый массив для заданного слова word
-				 return answerArray[i] = "_";
+
+		function setupAnswerArray(word) {
+			 // Возвращает итоговый массив для заданного слова word
+			var answerArray = []; 
+			for (var i = 0; i < word.length; i++) {
+				answerArray[i] = "_";
 			}
+
+			return answerArray;
 		};
+
 		function showPlayerProgress(answerArray) {
-			alert ('Осталось ' + remainingLetters + ' букв  ' + answerArray.join(' ')); // Отображает текущее состояние игры
+			// Отображает текущее состояние игры
+			alert ('Осталось ' + remainingLetters + ' букв  ' + answerArray.join(' ')); 
 		};
+
 		function getGuess() {
-			return prompt("Угадайте букву или нажмите Отмена для выхода из игры."); // Запрашивает ответ игрока с помощью prompt
+			// Запрашивает ответ игрока с помощью prompt
+			return prompt("Угадайте букву или нажмите Отмена для выхода из игры.");
 		};
+		
 		function updateGameState(guess, word, answerArray) {
 		// Обновляет answerArray согласно ответу игрока (guess)
 		// возвращает число, обозначающее, сколько раз буква guess
@@ -61,10 +72,12 @@
 			}// выводим результат игры
 		};
 
-		var word = pickWord(); //загаданное слово
-		var answerArray = setupAnswerArray(word); //итоговый массив
-		var remainingLetters = word.length; //сколько букв осталось угадать
-		var guess; //ответ игрока
+		//загаданное слово
+		var word = pickWord(); 
+		//итоговый массив
+		var answerArray = setupAnswerArray(word); 
+		//сколько букв осталось угадать
+		var remainingLetters = word.length;
 		var eff = word.length;
 
 		
@@ -74,6 +87,7 @@
 			var name = prompt('Как тебя зовут?');
 			alert('Привет ' + name + '!');
 			alert ('Загадано слово из ' + word.length + ' букв.';
+
 			//игровой цикл
 			while (remainingLetters > 0) {
 				// Показываем состояние игры
@@ -98,13 +112,10 @@
 						}
 					}
 				} 
-			}
-			
+			}	
 		} else {
 			alert('Приходи в другой раз!');
 		}
-		
-	
 	</script>
 </body>
 </html>
