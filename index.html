@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,6 +63,18 @@
 		// возвращает число, обозначающее, сколько раз буква guess
 		// встречается в слове, чтобы можно было обновить значение
 		// remainingLetters
+			var appear = 0;
+			for (var j = 0; j < word.length; j++) {
+				if (word[j] === guess.toLowerCase()) {
+					if (answerArray[j] == '_') {
+						answerArray[j] = guess.toLowerCase();
+						appear++;
+					} else {
+						alert('Буквы ' + guess + ' больше нет в этом слове!');
+					}							
+				}
+			}
+			return appear;
 		};
 		function result (answerArray) {
 			if (answerArray.join('') == word) {
@@ -78,15 +90,13 @@
 		var answerArray = setupAnswerArray(word); 
 		//сколько букв осталось угадать
 		var remainingLetters = word.length;
-		var eff = word.length;
 
-		
 		var question = confirm ('Сыграем?');
 
 		if (question == true) {
 			var name = prompt('Как тебя зовут?');
 			alert('Привет ' + name + '!');
-			alert ('Загадано слово из ' + word.length + ' букв.';
+			alert ('Загадано слово из ' + word.length + ' букв.');
 
 			//игровой цикл
 			while (remainingLetters > 0) {
@@ -101,20 +111,13 @@
 					alert ("Пожалуйста, введите одну букву!");
 				} else {
 					var correctGuesses = updateGameState(guess, word, answerArray);
-					for (var j = 0; j < word.length; j++) {
-						if (word[j] === guess.toLowerCase()) {
-							if (answerArray[j] == '_') {
-								answerArray[j] = guess.toLowerCase();
-								remainingLetters--;
-							} else {
-								alert('Буквы ' + guess + ' больше нет в этом слове!');
-							}							
-						}
-					}
+					remainingLetters -= correctGuesses;
 				} 
-			}	
+			}
+			
+			result(answerArray);
 		} else {
-			alert('Приходи в другой раз!');
+			alert('Приходи в другой раз!');	
 		}
 	</script>
 </body>
