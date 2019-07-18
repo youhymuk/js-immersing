@@ -4,12 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Найди клад!</title>
 	<style>
 		body {
 			height: 100vh;
 			margin: 0;
 			padding: 0;
+			text-align: center;
+			font-family: Arial, sans-serif;
 		}
 		.main-title {
 			text-align: center;
@@ -22,68 +24,18 @@
 			width: 500px;
 			height: 500px;
 		}
+		p {
+			margin: 8px 0;
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
 		<h1 class="main-title">Найди клад!</h1>
 		<img class="map" src="https://nostarch.com/images/treasuremap.png" alt="Карта">
 		<p class="distance"></p>
+		<p class="attempts"></p>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
-		//Получение случайных значений
-		 function getRandomNumber(size) {
-			return Math.floor(Math.random() * size);
-		}
-
-		//Вычесление расстояния от клика до клада
-		function getDistance (event, target) {
-			var diffX = event.offsetX - target.x;
-			var diffY = event.offsetY - target.y;
-			return Math.sqrt((diffX * diffX) + (diffY * diffY))
-		}
-
-		//Сообщение о близости к цели
-		function getDistanceHint (distance) {
-			if(distance < 10) {
-				return 'Обожжешься!';
-			} else if (distance < 20) {
-				return "Очень горячо";
-			} else if (distance < 40) {
-				return "Горячо";
-			} else if (distance < 80) {
-				return "Тепло";
-			} else if (distance < 160) {
-				return "Холодно";
-			} else if (distance < 320) {
-				return "Очень холодно";
-			} else {
-				return "Замерзнешь!";
-			}
-		}
-
-		var width = 500;
-		var height = 500;
-		var clicks = 0;
-
-		//Координаты клада
-		var target = {
-			x: getRandomNumber(width),
-			y: getRandomNumber(height)
-		};
-
-		//Обрабочтчик кликов
-		$('.map').click(function (event) {
-			clicks++;
-			//Вычесление расстояние от места клика до клада
-			var distance = getDistance(event, target);
-			// Подсказка о расстоянии
-			var distanceHint = getDistanceHint(distance);
-			$('.distance').text(distanceHint);
-			//Проверка на выигрыш
-			if (distance < 8) {
-				alert("Клад найден! Сделано кликов: " + clicks);
-			}
-		})
-	</script>
+	<script src="./main.js"></script>
 </body>
 </html>
